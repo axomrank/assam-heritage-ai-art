@@ -28,10 +28,17 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      - name: Prepare gallery files
+        run: |
+          mkdir -p _site/data
+          cp index.html duplicate-review.html gallery.css gallery.js catalog.js catalog.json favicon.svg README.md _site/
+          cp data/gallery.json _site/data/
+          cp -R images thumbnails _site/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: '_site'
 
       - name: Deploy to GitHub Pages
         id: deployment
